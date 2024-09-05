@@ -11,8 +11,12 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 require("./db")
 
-const RouterFile = require("./Routes/Routes") 
+const RouterFile = require("./Routes/AuthRoutes") 
 app.use("/api", RouterFile)
+ 
+const AvailabilityRoutes = require("./Routes/Availablity") 
+app.use("/api", AvailabilityRoutes)
+
 
 const port = process.env.PORT || 3000
 

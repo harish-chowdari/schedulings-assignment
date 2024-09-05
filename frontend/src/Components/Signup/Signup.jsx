@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import axios from '../../axios';
 import styles from './Signup.module.css'; // Import the CSS module
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Signup = () => {
   const [signup, setSignup] = useState({ name: '', email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState(''); // State to store error message
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleChange = (e) => {
     setSignup({ ...signup, [e.target.name]: e.target.value });
@@ -23,8 +24,9 @@ const Signup = () => {
       } else if (res.data.AlreadyExist) {
         setErrorMessage(res.data.AlreadyExist);
       } else {
-        console.log(res.data);
         // Handle successful signup
+        const userId = res.data._id; // Extract the user ID from response
+        navigate(`/schedule/${userId}`); // Redirect to the user details page
       }
     } catch (error) {
       console.log(error);

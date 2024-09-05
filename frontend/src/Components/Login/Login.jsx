@@ -26,7 +26,9 @@ const Login = () => {
       } else if (res.data.Incorrect) {
         setErrorMessage(res.data.Incorrect);
       } else {
-        navigate('/schedule');
+        const userId = res.data._id; // Extract the user ID from response
+        navigate(`/schedule/${userId}`);
+        
       }
     } catch (error) {
       console.log(error);
